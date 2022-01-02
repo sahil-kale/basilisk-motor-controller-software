@@ -5,10 +5,10 @@ TEST_DIR=$(PROJECT_DIR)/test
 CPPUTEST_HOME=$(TEST_DIR)/cpputest
 
 # project source files path
-SRC_DIRS=$(PROJECT_DIR)
+SRC_DIRS=$(PROJECT_DIR)/src
 
 # project header files path
-INCLUDE_DIRS=$(PROJECT_DIR)
+INCLUDE_DIRS=$(PROJECT_DIR)/inc
 
 # add this to avoid problems when including cpputest headers on test files
 INCLUDE_DIRS+=$(CPPUTEST_HOME)/include
