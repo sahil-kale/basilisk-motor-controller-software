@@ -21,3 +21,6 @@ TEST_TARGET=test_runner
 
 #run MakefileWorker.mk with the variables defined here
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
+
+# GODLY TUTORIAL SOURCE:
+# https://matheusmbar.com/bugfree-robot/2019/04/05/makefile-first-test.html
