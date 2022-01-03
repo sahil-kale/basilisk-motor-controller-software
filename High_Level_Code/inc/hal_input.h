@@ -1,6 +1,7 @@
 #ifndef HAL_INPUT_H
 #define HAL_INPUT_H
 #include <stdint.h>
+#include <stdbool.h>
 
 void init_hal_input(void);
 
