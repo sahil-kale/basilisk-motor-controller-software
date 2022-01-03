@@ -16,8 +16,17 @@ INCLUDE_DIRS+=$(CPPUTEST_HOME)/include
 ## specify where the test code is located
 TEST_SRC_DIRS=$(TEST_DIR)
 
+## mock path
+MOCKS_SRC_DIRS=$(TEST_DIR)/mocks
+
 ## what to call the test binary
 TEST_TARGET=test_runner
+
+CPPUTEST_CPPFLAGS+=-Wno-error=unused-parameter
+
+# Add the library linking to use Cppumock
+LD_LIBRARIES += -L$(CPPUTEST_HOME)/lib -lCppUTestExt
+
 
 #run MakefileWorker.mk with the variables defined here
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
