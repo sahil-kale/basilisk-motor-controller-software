@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-void init_hal_input(void);
+void hal_input_init(void);
 
 typedef struct input_state_info
 {

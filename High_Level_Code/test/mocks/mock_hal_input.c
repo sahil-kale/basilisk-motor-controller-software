@@ -1,7 +1,7 @@
 #include <CppUTestExt/MockSupport_c.h>
 #include "hal_input.h"
 
-void init_hal_input(void)
+void hal_input_init(void)
 {
     return;
 }
