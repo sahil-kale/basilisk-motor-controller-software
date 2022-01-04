@@ -23,6 +23,7 @@ MOCKS_SRC_DIRS=$(TEST_DIR)/mocks
 TEST_TARGET=test_runner
 
 CPPUTEST_CPPFLAGS+=-Wno-error=unused-parameter
+CPPUTEST_CPPFLAGS+=-Wno-error=unused-variable
 
 # Add the library linking to use Cppumock
 LD_LIBRARIES += -L$(CPPUTEST_HOME)/lib -lCppUTestExt

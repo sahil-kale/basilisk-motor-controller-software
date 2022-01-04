@@ -5,9 +5,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-bool BRAKE_MODE_ENABLED = true;
-const uint32_t INPUT_TIMEOUT_TICKS = 100;
-
 void control_loop_init(void)
 {
     hal_input_init(); //Init the input module
@@ -38,7 +35,7 @@ void control_loop_run(void)
         commanded_speed = 0;
         input_state->sign_change_requested = false;
     }
-    else if(input_state->speed == 0 && BRAKE_MODE_ENABLED)
+    else if(input_state->speed == 0 && input_state->BRAKE_MODE_ENABLED)
     {
         commanded_speed = 0;
         brake_set = true;

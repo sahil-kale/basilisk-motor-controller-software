@@ -31,13 +31,14 @@ TEST(ControlLoop, speed_is_0_with_brake)
     input_state.speed = 0;
     input_state.ticks_since_last_input = 0;
     input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     mock_c()->expectOneCall("get_input_state_info")
             ->andReturnPointerValue(&input_state);
 
     mock_c()->expectOneCall("hal_hbridge_set_speed")
             ->withIntParameters("speed", 0)
-            ->withBoolParameters("brake_mode_set", true);
+            ->withBoolParameters("brake_mode_set", input_state.BRAKE_MODE_ENABLED);
 
     control_loop_run();
 
@@ -52,6 +53,7 @@ TEST(ControlLoop, speed_is_0_with_sign_change_requested)
     input_state.speed = 50;
     input_state.ticks_since_last_input = 0;
     input_state.sign_change_requested = true;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     mock_c()->expectOneCall("get_input_state_info")
             ->andReturnPointerValue(&input_state);
@@ -74,6 +76,7 @@ TEST(ControlLoop, speed_is_50_with_no_sign_change_requested)
     input_state.speed = 50;
     input_state.ticks_since_last_input = 0;
     input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     mock_c()->expectOneCall("get_input_state_info")
             ->andReturnPointerValue(&input_state);
@@ -86,7 +89,6 @@ TEST(ControlLoop, speed_is_50_with_no_sign_change_requested)
 
 }
 
-const uint32_t INPUT_TIMEOUT_TICKS = 100;
 //Test that the speed is set to 0 if the input is not received for a while
 TEST(ControlLoop, speed_is_0_if_input_is_not_received_for_a_while)
 {
@@ -97,13 +99,14 @@ TEST(ControlLoop, speed_is_0_if_input_is_not_received_for_a_while)
     input_state.speed = 50;
     input_state.ticks_since_last_input = INPUT_TIMEOUT_TICKS;
     input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     mock_c()->expectOneCall("get_input_state_info")
             ->andReturnPointerValue(&input_state);
 
     mock_c()->expectOneCall("hal_hbridge_set_speed")
             ->withIntParameters("speed", 0)
-            ->withBoolParameters("brake_mode_set", true);
+            ->withBoolParameters("brake_mode_set", input_state.BRAKE_MODE_ENABLED);
 
     control_loop_run();
 
@@ -119,6 +122,7 @@ TEST(ControlLoop, speed_is_positive_to_negative)
     input_state.speed = 50;
     input_state.ticks_since_last_input = 0;
     input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     mock_c()->expectOneCall("get_input_state_info")
             ->andReturnPointerValue(&input_state);
@@ -167,6 +171,7 @@ TEST(ControlLoop, speed_is_negative_to_positive)
     input_state.speed = -50;
     input_state.ticks_since_last_input = 0;
     input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     mock_c()->expectOneCall("get_input_state_info")
             ->andReturnPointerValue(&input_state);
@@ -215,6 +220,7 @@ TEST(ControlLoop, speed_is_positive_to_0_and_brake_mode_is_set)
     input_state.speed = 50;
     input_state.ticks_since_last_input = 0;
     input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     mock_c()->expectOneCall("get_input_state_info")
             ->andReturnPointerValue(&input_state);
@@ -236,7 +242,7 @@ TEST(ControlLoop, speed_is_positive_to_0_and_brake_mode_is_set)
 
     mock_c()->expectOneCall("hal_hbridge_set_speed")
             ->withIntParameters("speed", 0)
-            ->withBoolParameters("brake_mode_set", true);
+            ->withBoolParameters("brake_mode_set", input_state.BRAKE_MODE_ENABLED);
 
     control_loop_run();
 }
@@ -251,6 +257,7 @@ TEST(ControlLoop, speed_is_negative_to_0_and_brake_mode_is_set)
     input_state.speed = -50;
     input_state.ticks_since_last_input = 0;
     input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     mock_c()->expectOneCall("get_input_state_info")
             ->andReturnPointerValue(&input_state);
@@ -266,6 +273,7 @@ TEST(ControlLoop, speed_is_negative_to_0_and_brake_mode_is_set)
     input_state.speed = 0;
     input_state.ticks_since_last_input = 0;
     input_state.sign_change_requested = true;
+    input_state.BRAKE_MODE_ENABLED = true;
 
     //Brake mode should be false since we just requested a sign change. In reality this happens at a super fast rate
 
@@ -285,7 +293,32 @@ TEST(ControlLoop, speed_is_negative_to_0_and_brake_mode_is_set)
 
     mock_c()->expectOneCall("hal_hbridge_set_speed")
             ->withIntParameters("speed", 0)
-            ->withBoolParameters("brake_mode_set", true);
+            ->withBoolParameters("brake_mode_set", input_state.BRAKE_MODE_ENABLED);
 
     control_loop_run();
+}
+
+//Test that the timeout increments on control loop call
+TEST(ControlLoop, timeout_increments)
+{
+    mock_c()->ignoreOtherCalls();
+
+    static input_state_info_t input_state; 
+
+    input_state.speed = 50;
+    input_state.ticks_since_last_input = 0;
+    input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
+
+    mock_c()->expectOneCall("get_input_state_info")
+            ->andReturnPointerValue(&input_state);
+
+    mock_c()->expectOneCall("hal_hbridge_set_speed")
+            ->withIntParameters("speed", 50)
+            ->withBoolParameters("brake_mode_set", false);
+
+    control_loop_run();
+
+    CHECK_EQUAL(1, input_state.ticks_since_last_input);
+
 }
