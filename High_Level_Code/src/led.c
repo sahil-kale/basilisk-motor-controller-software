@@ -1,6 +1,7 @@
 #include "led.h"
 #include "hal_led_control.h"
 #include "hal_input.h"
+#include <assert.h>
 
 const colour_value_t FORWARD_COLOUR = {0, 255, 0};
 const colour_value_t BACKWARDS_COLOUR = {255, 0, 0};
@@ -15,6 +16,7 @@ void init_led(void)
 void led_controller_run(void)
 {
     input_state_info_t* input_state = get_input_state_info();
+    assert(input_state != NULL);
 
     if(input_state->ticks_since_last_input >= INPUT_TIMEOUT_TICKS)
     {
