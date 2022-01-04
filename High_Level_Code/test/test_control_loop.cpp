@@ -103,7 +103,7 @@ TEST(ControlLoop, speed_is_0_if_input_is_not_received_for_a_while)
 
     mock_c()->expectOneCall("hal_hbridge_set_speed")
             ->withIntParameters("speed", 0)
-            ->withBoolParameters("brake_mode_set", false);
+            ->withBoolParameters("brake_mode_set", true);
 
     control_loop_run();
 
