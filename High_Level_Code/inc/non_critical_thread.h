@@ -1,5 +1,9 @@
 #ifndef NON_CRITICAL_THREAD_H
 #define NON_CRITICAL_THREAD_H
+#include <stdint.h>
+
+extern const uint16_t MAX_TEMP_ADC_VALUE;
+extern const uint16_t MAX_VOLTAGE_ADC_VALUE;
 
 /**
  * @brief Non critical thread init. Includes temp, voltage, and LED monitoring
