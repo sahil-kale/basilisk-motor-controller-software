@@ -5,7 +5,8 @@
 #include <assert.h>
 #include <stdio.h>
 
-static bool brake_mode_enabled = true;
+bool BRAKE_MODE_SET = true;
+const uint32_t INPUT_TIMEOUT_TICKS = 100;
 
 void control_loop_init(void)
 {
@@ -20,7 +21,7 @@ void control_loop_run(void)
     
     int8_t speed = input_state->speed;
     
-    hal_hbridge_set_speed(speed, brake_mode_enabled);
+    hal_hbridge_set_speed(speed, BRAKE_MODE_SET);
 
 }
 

@@ -1,5 +1,8 @@
 #ifndef CONTROL_LOOP_H
 #define CONTROL_LOOP_H
+#include <stdbool.h>
+#include <stdint.h>
+
 
 /**
  * @brief Initialize the control loop, including PWM modules and timer ISR's
