@@ -297,3 +297,28 @@ TEST(ControlLoop, speed_is_negative_to_0_and_brake_mode_is_set)
 
     control_loop_run();
 }
+
+//Test that the timeout increments on control loop call
+TEST(ControlLoop, timeout_increments)
+{
+    mock_c()->ignoreOtherCalls();
+
+    static input_state_info_t input_state; 
+
+    input_state.speed = 50;
+    input_state.ticks_since_last_input = 0;
+    input_state.sign_change_requested = false;
+    input_state.BRAKE_MODE_ENABLED = true;
+
+    mock_c()->expectOneCall("get_input_state_info")
+            ->andReturnPointerValue(&input_state);
+
+    mock_c()->expectOneCall("hal_hbridge_set_speed")
+            ->withIntParameters("speed", 50)
+            ->withBoolParameters("brake_mode_set", false);
+
+    control_loop_run();
+
+    CHECK_EQUAL(1, input_state.ticks_since_last_input);
+
+}
