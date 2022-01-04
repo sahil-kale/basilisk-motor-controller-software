@@ -5,8 +5,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-const uint32_t INPUT_TIMEOUT_TICKS = 100;
-
 void control_loop_init(void)
 {
     hal_input_init(); //Init the input module

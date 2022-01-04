@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+extern const uint32_t INPUT_TIMEOUT_TICKS;
 
 void hal_input_init(void);
 

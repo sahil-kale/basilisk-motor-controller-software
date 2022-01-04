@@ -89,7 +89,6 @@ TEST(ControlLoop, speed_is_50_with_no_sign_change_requested)
 
 }
 
-const uint32_t INPUT_TIMEOUT_TICKS = 100;
 //Test that the speed is set to 0 if the input is not received for a while
 TEST(ControlLoop, speed_is_0_if_input_is_not_received_for_a_while)
 {

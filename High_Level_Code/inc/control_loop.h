@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-
 /**
  * @brief Initialize the control loop, including PWM modules and timer ISR's
  * 

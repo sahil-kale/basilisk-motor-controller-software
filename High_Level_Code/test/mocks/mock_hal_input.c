@@ -2,6 +2,8 @@
 #include "hal_input.h"
 #include <stdio.h>
 
+const uint32_t INPUT_TIMEOUT_TICKS = 100;
+
 void hal_input_init(void)
 {
     return;
