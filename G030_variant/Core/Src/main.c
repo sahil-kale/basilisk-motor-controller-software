@@ -26,6 +26,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "control_loop.h"
+#include "non_critical_thread.h"
 
 /* USER CODE END Includes */
 
@@ -93,7 +95,12 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM14_Init();
   MX_USART2_UART_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim16);
+  control_loop_init();
+  init_non_critical_thread();
+  
 
   /* USER CODE END 2 */
 
@@ -101,19 +108,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, 0);
-	  HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, 0);
-	  HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, 0);
-	  HAL_GPIO_WritePin(B_LOW_GPIO_Port, B_LOW_Pin, 0);
-	  HAL_GPIO_WritePin(A_LOW_GPIO_Port, A_LOW_Pin, 0);
-	  HAL_Delay(500);
-	  HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, 1);
-	  HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, 1);
-	  HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, 1);
-	  HAL_GPIO_WritePin(B_LOW_GPIO_Port, B_LOW_Pin, 1);
-	  HAL_GPIO_WritePin(A_LOW_GPIO_Port, A_LOW_Pin, 1);
-	  HAL_Delay(500);
-
+    non_critical_thread_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
