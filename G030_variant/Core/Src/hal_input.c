@@ -9,12 +9,13 @@ void hal_input_init(void)
 {
     input_info.BRAKE_MODE_ENABLED = 0;
     input_info.sign_change_requested = 0;
-    input_info.speed = 50;
+    input_info.speed = 100;
     input_info.ticks_since_last_input = 0;
 }
 
 input_state_info_t* get_input_state_info(void)
 {
+    input_info.ticks_since_last_input = 0;
     return &input_info;
 }
 

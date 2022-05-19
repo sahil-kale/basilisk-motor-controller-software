@@ -4,10 +4,10 @@
 #include <assert.h>
 #include <stddef.h>
 
-const colour_value_t FORWARD_COLOUR = {0, 255, 0};
-const colour_value_t BACKWARDS_COLOUR = {255, 0, 0};
+const colour_value_t FORWARD_COLOUR = {0, 127, 0};
+const colour_value_t BACKWARDS_COLOUR = {127, 0, 0};
 const colour_value_t NO_MOVEMENT_COLOUR = {0, 0, 0};
-const colour_value_t NO_SIGNAL_COLOUR = {0, 0, 255};
+const colour_value_t NO_SIGNAL_COLOUR = {0, 0, 127};
 
 void init_led(void)
 {
