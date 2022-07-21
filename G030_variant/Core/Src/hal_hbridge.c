@@ -42,7 +42,7 @@ void hal_hbridge_set_speed(int8_t speed, bool brake_mode_set)
     }
     else if(speed > 0)
     {
-        __HAL_TIM_SET_COMPARE(&htim3, PWM_A_HIGH_TIM_CHANNEL, 100);
+        __HAL_TIM_SET_COMPARE(&htim3, PWM_A_HIGH_TIM_CHANNEL, ABS(speed));
         __HAL_TIM_SET_COMPARE(&htim3, PWM_B_HIGH_TIM_CHANNEL, 0);
         
         //Make opposite phase low short phase to GND, leave other side unasserted

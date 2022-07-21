@@ -68,8 +68,6 @@ void Error_Handler(void);
 #define A_LOW_GPIO_Port GPIOA
 #define PWM_B_HIGH_Pin GPIO_PIN_6
 #define PWM_B_HIGH_GPIO_Port GPIOA
-#define PWM_A_HIGH_Pin GPIO_PIN_7
-#define PWM_A_HIGH_GPIO_Port GPIOA
 #define LED_R_Pin GPIO_PIN_8
 #define LED_R_GPIO_Port GPIOA
 #define LED_G_Pin GPIO_PIN_11

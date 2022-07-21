@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "control_loop.h"
 #include "non_critical_thread.h"
+#include "hal_hbridge.h"
 
 /* USER CODE END Includes */
 
@@ -97,7 +98,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim16);
+  //HAL_TIM_Base_Start_IT(&htim16);
   control_loop_init();
   init_non_critical_thread();
   
@@ -108,6 +109,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	hal_hbridge_set_speed(-50, false);
+	HAL_Delay(1000);
     non_critical_thread_run();
     /* USER CODE END WHILE */
 
