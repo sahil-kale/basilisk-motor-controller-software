@@ -15,7 +15,6 @@ void hal_input_init(void)
 
 input_state_info_t* get_input_state_info(void)
 {
-    input_info.ticks_since_last_input++;
     return &input_info;
 }
 
