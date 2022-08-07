@@ -1,5 +1,7 @@
 ## Basilsik Motor Controller Software
 
+![image](https://user-images.githubusercontent.com/32375512/183306439-b15b1c74-507d-4077-88cd-3f728b1d4264.png)
+
 # Description
 Software for brushed motor controller
 
