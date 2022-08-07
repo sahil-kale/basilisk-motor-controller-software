@@ -166,5 +166,36 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
 }
 
+//See ControllersTech input captur eimplmenetation, https://controllerstech.com/input-capture-in-stm32/
+
+static volatile bool isFirstCaptured = false;
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+
+	if(htim->Instance == TIM14)
+	{
+		if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+		{
+			if(isFirstCaptured)
+			{
+				__HAL_TIM_SET_COUNTER(htim, 0); //Rising edge caught, reset timer
+				isFirstCaptured = true;
+			}
+			else
+			{
+				uint16_t ticks = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+
+				input_new_tick_delta(ticks);
+
+				isFirstCaptured = false;
+			}
+
+
+		}
+
+	}
+}
+
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

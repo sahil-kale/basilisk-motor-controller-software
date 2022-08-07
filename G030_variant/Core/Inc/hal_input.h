@@ -17,4 +17,6 @@ typedef struct input_state_info
 
 input_state_info_t* get_input_state_info(void);
 
+void input_new_tick_delta(uint16_t delta_tick);
+
 #endif
