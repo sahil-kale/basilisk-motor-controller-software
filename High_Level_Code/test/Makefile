@@ -2,7 +2,7 @@ MAKEFILE_DIR=$(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 PROJECT_DIR=$(realpath $(MAKEFILE_DIR)..)
 TEST_DIR=$(PROJECT_DIR)/test
 
-CPPUTEST_HOME=$(TEST_DIR)/cpputest
+CPPUTEST_HOME=$(PROJECT_DIR)/../cpputest
 
 # project source files path
 SRC_DIRS=$(PROJECT_DIR)/src
